@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
+    <title>Mottu Sense - <span th:text="#{moto.new}"></span></title>
+</head>
+<body class="bg-base-200 min-h-screen flex flex-col">
+
+<!-- HEADER VERDE -->
+<header class="bg-green-600 text-white p-4 shadow-lg">
+    <h1 class="text-2xl font-bold" th:text="#{moto.new}"></h1>
+</header>
+
+<main class="flex-grow grid grid-cols-1 gap-6 p-6 place-items-center">
+    <form method="POST" class="w-full max-w-md bg-white shadow-xl rounded-lg p-6" th:object="${moto}"  th:action="${moto.id} != null ? @{/moto/edit/{id}(id=${moto.id})} : @{/moto/form}">
+
+        <!-- Erros globais -->
+        <div th:if="${#fields.hasGlobalErrors()}" class="alert alert-error mb-4">
+            <span th:each="err : ${#fields.globalErrors()}" th:text="${err}"></span>
+        </div>
+
+        <h2 class="text-lg font-bold mb-4 text-gray-700" th:text="#{moto.new}"></h2>
+
+        <!-- Placa -->
+        <fieldset class="fieldset mb-4">
+            <legend class="fieldset-legend" th:text="#{placa}"></legend>
+            <input th:field="*{placa}" th:errorclass="input-error"
+                   type="text" class="input input-bordered w-full" maxlength="10" />
+            <p class="label text-error" th:errors="*{placa}"></p>
+        </fieldset>
+
+        <!-- Modelo -->
+        <fieldset class="fieldset mb-4">
+            <legend class="fieldset-legend" th:text="#{modelo}"></legend>
+            <input th:field="*{modelo}" th:errorclass="input-error"
+                   type="text" class="input input-bordered w-full" maxlength="50" />
+            <p class="label text-error" th:errors="*{modelo}"></p>
+        </fieldset>
+
+        <!-- Chassi -->
+        <fieldset class="fieldset mb-4">
+            <legend class="fieldset-legend" th:text="#{numeroChassi}"></legend>
+            <input th:field="*{numeroChassi}" th:errorclass="input-error"
+                   type="text" class="input input-bordered w-full" maxlength="17" />
+            <p class="label text-error" th:errors="*{numeroChassi}"></p>
+        </fieldset>
+
+        <!-- Status -->
+        <fieldset class="fieldset mb-4">
+            <legend class="fieldset-legend" th:text="#{status}"></legend>
+            <select th:field="*{status}" class="select select-bordered w-full">
+                <option th:each="s : ${T(br.com.fiap.Mottusense.models.StatusMoto).values()}"
+                        th:value="${s}" th:text="${s}"></option>
+            </select>
+            <p class="label text-error" th:errors="*{status}"></p>
+        </fieldset>
+
+        <!-- Pátio -->
+        <fieldset class="fieldset mb-6">
+            <legend class="fieldset-legend" th:text="#{patio}"></legend>
+            <select th:field="*{patio.id}" class="select select-bordered w-full">
+                <option th:each="p : ${patios}" th:value="${p.id}" th:text="${p.nome}"></option>
+            </select>
+            <p class="label text-error" th:errors="*{patio}"></p>
+        </fieldset>
+
+        <!-- Botões -->
+        <div class="flex justify-between">
+            <a href="/moto" class="btn btn-neutral" th:text="#{cancel}"></a>
+            <button type="submit" class="btn btn-success" th:text="#{save}"></button>
+        </div>
+    </form>
+</main>
+
+</body>
+</html>

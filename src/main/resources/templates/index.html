@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <title>Mottu Sense</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            min-height: 100vh;
+        }
+        .decorative-element {
+            height: 6px;
+            background: linear-gradient(90deg, #16a34a, #22c55e, #4ade80);
+            border-radius: 3px;
+            margin: 15px 0;
+        }
+
+        .logo-img {
+            width: 90px;
+            height: 90px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid #22c55e;
+            box-shadow: 0 4px 16px #16a34a44;
+            background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+            display: block;
+            margin: 0 auto 10px auto;
+            transition: width 0.2s, height 0.2s;
+        }
+        @media (max-width: 640px) {
+            .container {
+                padding: 0.5rem !important;
+                max-width: 100vw;
+            }
+            .bg-gradient-to-r {
+                padding: 1.5rem !important;
+            }
+            .logo-img {
+                width: 60px;
+                height: 60px;
+            }
+            .text-4xl {
+                font-size: 1.5rem !important;
+            }
+            .flex {
+                flex-direction: column !important;
+                gap: 1rem !important;
+            }
+            .flex.items-center {
+                flex-direction: row !important;
+                gap: 0.5rem !important;
+                margin-top: 1rem;
+            }
+            .grid-cols-1, .md\:grid-cols-2, .lg\:grid-cols-3 {
+                grid-template-columns: 1fr !important;
+            }
+            .card {
+                margin-bottom: 1rem;
+            }
+            .input, .btn {
+                width: 100% !important;
+                font-size: 1rem !important;
+            }
+            .card-actions {
+                flex-direction: column !important;
+                gap: 0.5rem !important;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container mx-auto max-w-5xl p-4">
+    <!-- Cabeçalho -->
+    <div class="bg-gradient-to-r from-green-700 to-green-500 rounded-2xl p-8 mb-8 shadow text-white text-center">
+        <img src="/images/logoo.jpg" alt="Mottu Sense Logo" class="logo-img">
+        <h1 class="text-4xl font-bold mb-2">Mottu Sense</h1>
+        <p class="opacity-90">Controle inteligente, gestão eficiente.</p>
+    </div>
+    <div class="decorative-element"></div>
+
+    <!-- Navbar -->
+    <div class="flex justify-between items-center mb-6">
+        <div class="flex gap-3">
+            <a href="/patio" class="btn btn-success">Ver Pátios</a>
+            <a href="/moto/form" class="btn btn-success" th:text="#{moto.new}"></a>
+            <a href="/sensor-localizacao" class="btn btn-info">Ir para a página de sensores</a>
+        </div>
+        <div class="flex items-center gap-3">
+            <img th:src="${avatar}" alt="Avatar" class="w-10 h-10 rounded-full border-2 border-green-600">
+            <span th:text="${user.attributes.email}" class="font-semibold text-green-700"></span>
+            <a href="/logout" class="btn btn-error">Logout</a>
+
+            <details>
+                <summary class="btn btn-success">🌎</summary>
+                <ul class="bg-green-600 rounded-t-none p-2">
+                    <li><a href="?lang=pt_BR" class="text-white hover:bg-green-700 px-4 py-2 block">🇧🇷 Português</a></li>
+                    <li><a href="?lang=en_US" class="text-white hover:bg-green-700 px-4 py-2 block">🏴 English</a></li>
+                </ul>
+            </details>
+        </div>
+
+    </div>
+
+    <!-- Barra de busca -->
+    <form th:action="@{/moto/search}" method="get" class="flex justify-center gap-2 mb-6">
+        <input type="text" name="placa" placeholder="Buscar por placa..." class="input input-bordered w-80" />
+        <button type="submit" class="btn btn-success">
+            <i class="fas fa-search mr-2"></i> Buscar
+        </button>
+    </form>
+
+    <!-- Mensagem de alerta -->
+    <div th:if="${message}" role="alert" class="alert alert-success mb-6">
+        <span th:text="${message}"></span>
+    </div>
+
+    <!-- Cards das motos -->
+    <main class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div th:each="moto : ${motos}" class="card bg-white shadow-lg rounded-2xl">
+            <div class="badge badge-success m-4" th:text="${moto.status}"></div>
+            <div class="card-body p-6">
+                <h2 class="card-title text-green-700" th:text="${moto.modelo}"></h2>
+                <p th:text="'Placa: ' + ${moto.placa}"></p>
+                <p th:text="'Chassi: ' + ${moto.numeroChassi}"></p>
+                <p th:if="${moto.patio != null}" th:text="'Pátio: ' + ${moto.patio.nome}"></p>
+            </div>
+            <div class="card-actions justify-end p-4">
+                <a th:href="@{/moto/edit/{id}(id=${moto.id})}" class="btn btn-warning">Editar</a>
+                <form th:action="@{/moto/delete/{id}(id=${moto.id})}" method="post" style="display:inline;">
+                    <button type="submit" class="btn btn-error">Excluir</button>
+                </form>
+            </div>
+        </div>
+        <!-- Estado vazio -->
+        <div th:if="${motos.empty}" class="empty-state col-span-full text-center py-16 text-gray-500">
+            <i class="fas fa-inbox text-5xl mb-4"></i>
+            <h3 class="text-xl font-bold mb-2">Nenhuma moto cadastrada</h3>
+            <p>Não há motos disponíveis no sistema no momento.</p>
+        </div>
+    </main>
+</div>
+</body>
+</html>
