@@ -1,0 +1,34 @@
+CREATE TABLE moto
+(
+    id            BIGINT IDENTITY(1,1) NOT NULL,
+    placa         VARCHAR(10),
+    modelo        VARCHAR(50),
+    numero_chassi VARCHAR(17),
+    status        VARCHAR(255) NOT NULL,
+    patio_id      BIGINT,
+    CONSTRAINT pk_moto PRIMARY KEY (id),
+    CONSTRAINT uc_moto_placa UNIQUE (placa),
+    CONSTRAINT uc_moto_chassi UNIQUE (numero_chassi)
+);
+
+CREATE TABLE patio
+(
+    id       BIGINT IDENTITY(1,1) NOT NULL,
+    nome     VARCHAR(100),
+    endereco VARCHAR(255),
+    CONSTRAINT pk_patio PRIMARY KEY (id)
+);
+
+CREATE TABLE sensor_localizacao
+(
+    id                  BIGINT IDENTITY(1,1) NOT NULL,
+    latitude            FLOAT NOT NULL,
+    longitude           FLOAT NOT NULL,
+    time_da_localizacao DATETIME NOT NULL,
+    moto_id             BIGINT NOT NULL,
+    CONSTRAINT pk_sensor_localizacao PRIMARY KEY (id),
+    CONSTRAINT fk_sensor_moto FOREIGN KEY (moto_id) REFERENCES moto (id) ON DELETE CASCADE
+);
+
+ALTER TABLE moto
+    ADD CONSTRAINT FK_MOTO_ON_PATIO FOREIGN KEY (patio_id) REFERENCES patio (id);
