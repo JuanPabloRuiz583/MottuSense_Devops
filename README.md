@@ -37,7 +37,13 @@ Aplicação web MVC para gestão de motos, sensores de localização e pátios, 
 - Seeder (deixando patios ja cadastrados automaticamente no sistema)
 - compose.yaml 
 
-## Instalação do projeto e instruções passo a passo para rodar app service + banco de dados, via cli (obs: para o projeto funcionar sem erros os seguintes comandos abaixo precissam ser seguidos)
+
+
+## Diagrama 
+<img width="1500" height="1017" alt="sprint3 drawio" src="https://github.com/user-attachments/assets/589b7a99-c5cd-4c0e-9313-71f757e99142" />
+
+
+# Instalação do projeto e instruções passo a passo para rodar app service + banco de dados, via cli (obs: para o projeto funcionar sem erros os seguintes comandos abaixo precissam ser seguidos)
 
 1. **Clone o repositório:**
    ```bash
