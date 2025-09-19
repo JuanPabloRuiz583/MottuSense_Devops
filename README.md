@@ -57,7 +57,9 @@ Aplicação web MVC para gestão de motos, sensores de localização e pátios, 
    az sql server firewall-rule create --resource-group mottusense-rg --server mottusense-sqlsrv-br --name AllowAllIPs --start-ip-address 0.0.0.0 --end-ip-address 255.255.255.255
 
 
+
 6. **copie os scripts de criação de tabelas do meu arquivo script_db.sql, entre depois no query editor do portal azure e cole os scripts la e execute**
+
 
    
 7. **Criar App Service Plan:**
@@ -78,19 +80,18 @@ Aplicação web MVC para gestão de motos, sensores de localização e pátios, 
 
 
 
-
 10. **rodar esse comando dentro da pasta do projeto:**
-   ```bash
-   ./gradlew clean bootJar
+    ```bash
+    ./gradlew clean bootJar
 
 
 11. **Fazer deploy do .jar para o App Service fazer dentro da pasta do projeto:**
-   ```bash
-   az webapp deploy --resource-group mottusense-rg --name mottusense-app --src-path .\build\libs\mottusense-0.0.1-SNAPSHOT.jar --type jar
+    ```bash
+    az webapp deploy --resource-group mottusense-rg --name mottusense-app --src-path .\build\libs\mottusense-0.0.1-SNAPSHOT.jar --type jar
 
 12. **se tudo foi seguido corretamente a aplicação estara disponivel no link:**
-   ```bash
-   https://mottusense-app.azurewebsites.net
+    ```bash
+    https://mottusense-app.azurewebsites.net
 
 
 13. **Acesse no navegador:**
