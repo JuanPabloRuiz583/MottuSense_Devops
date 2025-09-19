@@ -16,9 +16,9 @@ Combinando banco de dados relacional e não relacional, DevOps, testes de qualid
 
 ## Beneficios para o negocio
 
--rapido gerenciamento de motos que estao inativas e em uso,pelo nosso site
--busca de motos por placa
--sensores que disponibilizam a localização exata da moto atraves da latitude e longitude
+- rapido gerenciamento de motos que estao inativas e em uso,pelo nosso site
+- busca de motos por placa
+- sensores que disponibilizam a localização exata da moto atraves da latitude e longitude
 
 # Mottu Sense
 
