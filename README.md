@@ -31,50 +31,101 @@ Aplicação web MVC para gestão de motos, sensores de localização e pátios, 
 - Seeder (deixando patios ja cadastrados automaticamente no sistema)
 - compose.yaml 
 
-## Instalação
+## Instalação do projeto e instruções passo a passo para rodar(app service + banco de dados)
 
 1. **Clone o repositório:**
    ```bash
    git clone https://github.com/JuanPabloRuiz583/MottuSense_MvcDefinitivo.git
 
-2. **Configure as seguintes variaveis de ambiente para funcionar a autenticacao no google e github:**
+2. **Criar grupo de recurso :**
    ```bash
-   GITHUB_CLIENT_ID = Ov23li0Nu4JFz0n2ay1r
-   GITHUB_CLIENT_SECRET = 948617a4f142c1964d46d670371112340f8a964c
-   GOOGLE_CLIENT_ID = 412634895320-fuvf9cnj52cmdnpvk1huea1aim4v673n.apps.googleusercontent.com
-   GOOGLE_CLIENT_SECRET = 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
+   az group create --name mottusense-rg --location eastus
 
 
-3. **Abra o docker desktop antes de executar o projeto**
+3. **Criar SQL Server:**
+   ```bash
+   az sql server create --name mottusense-sqlsrv-br --resource-group mottusense-rg --location brazilsouth --admin-user admin_fiap --admin-password 'Teste123!'
+
+
+4. **Criar banco de dados no SQL Server:**
+   ```bash
+   az sql db create --resource-group mottusense-rg --server mottusense-sqlsrv-br --name mottusensedb --service-objective S0
+
+
+5. **Criar regra de firewall para liberar acesso:**
+   ```bash
+   az sql server firewall-rule create --resource-group mottusense-rg --server mottusense-sqlsrv-br --name AllowAllIPs --start-ip-address 0.0.0.0 --end-ip-address 255.255.255.255
+
+
+6. **copie os scripts de criação de tabelas do meu arquivo script_db.sql, entre depois no query editor do portal azure e cole os scripts la e execute**
+
    
-4. **rode o projeto**
+7. **Criar App Service Plan:**
+   ```bash
+   az appservice plan create --name mottusense-plan --resource-group mottusense-rg --sku B1 --is-linux --location eastus
 
-5. **Acesse no navegador:**
+
+
+8. **Criar App Service**
+   ```bash
+   az webapp create --resource-group mottusense-rg --plan mottusense-plan --name mottusense-app --runtime "JAVA:17-java17"
+
+
+
+9. **Configurar variáveis de ambiente no App Service:**
+   ```bash
+   az webapp config appsettings set --resource-group mottusense-rg --name mottusense-app --settings GITHUB_CLIENT_ID=Ov23liPExW7Z4g4CtLOY GITHUB_CLIENT_SECRET=3d334f3113c1890485ccc6fa39c27102bf512b84 GOOGLE_CLIENT_ID=412634895320-k0f2uesevgp6k3dulemambo97rd3qn2o.apps.googleusercontent.com GOOGLE_CLIENT_SECRET=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 SPRING_DATASOURCE_URL="jdbc:sqlserver://mottusense-sqlsrv-br.database.windows.net:1433;database=mottusensedb;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30" SPRING_DATASOURCE_USERNAME=admin_fiap@mottusense-sqlsrv-br SPRING_DATASOURCE_PASSWORD=Teste123!
+
+
+
+
+10. **rodar esse comando dentro da pasta do projeto:**
+   ```bash
+   ./gradlew clean bootJar
+
+
+11. **Fazer deploy do .jar para o App Service fazer dentro da pasta do projeto:**
+   ```bash
+   az webapp deploy --resource-group mottusense-rg --name mottusense-app --src-path .\build\libs\mottusense-0.0.1-SNAPSHOT.jar --type jar
+
+12. **se tudo foi seguido corretamente a aplicação estara disponivel no link:**
+   ```bash
+   https://mottusense-app.azurewebsites.net
+
+
+13. **Acesse no navegador:**
 
 🔑 Login (autentique-se primeiro):
-http://localhost:8080/login
+
+http://mottusense-app.azurewebsites.net/login
 
 🏍️ Motos — Cadastro / Edição / Remoção / Listagem / Busca por placa:
-http://localhost:8080/moto
+
+http://mottusense-app.azurewebsites.net/moto
 (se não estiver autenticado, será redirecionado para a tela de login)
 
 📄 Formulário de Motos:
-http://localhost:8080/moto/form
+
+http://mottusense-app.azurewebsites.net/moto/form
 (acessível também clicando no botão "Nova moto")
 
 🏢 Pátios — Listagem (ver quais pátios estão disponíveis antes do cadastro):
-http://localhost:8080/patio
+
+http://mottusense-app.azurewebsites.net/patio
 
 📍 Sensores — Cadastro / Edição / Remoção / Listagem:
-http://localhost:8080/sensor-localizacao
+
+http://mottusense-app.azurewebsites.net/sensor-localizacao
 (para criar, é necessário ter uma moto cadastrada para vincular a placa)
 
 📝 Formulário de Sensores:
-http://localhost:8080/sensor-localizacao/form
+
+http://mottusense-app.azurewebsites.net/sensor-localizacao/form
 (acessível também clicando no botão "Cadastrar sensor")
 
 🔒 Logout:
-http://localhost:8080/logout
+
+http://mottusense-app.azurewebsites.net/logout
 
 
 
