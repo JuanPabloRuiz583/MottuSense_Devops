@@ -14,6 +14,12 @@ Combinando banco de dados relacional e não relacional, DevOps, testes de qualid
 - Monitoramento em tempo real das motos atraves dos sensores
 - localização exata das motos
 
+## Beneficios para o negocio
+
+-rapido gerenciamento de motos que estao inativas e em uso,pelo nosso site
+-busca de motos por placa
+-sensores que disponibilizam a localização exata da moto atraves da latitude e longitude
+
 # Mottu Sense
 
 Aplicação web MVC para gestão de motos, sensores de localização e pátios, com autenticação de usuários.
@@ -31,7 +37,7 @@ Aplicação web MVC para gestão de motos, sensores de localização e pátios, 
 - Seeder (deixando patios ja cadastrados automaticamente no sistema)
 - compose.yaml 
 
-## Instalação do projeto e instruções passo a passo para rodar(app service + banco de dados)
+## Instalação do projeto e instruções passo a passo para rodar app service + banco de dados, via cli (obs: para o projeto funcionar sem erros os seguintes comandos abaixo precissam ser seguidos)
 
 1. **Clone o repositório:**
    ```bash
