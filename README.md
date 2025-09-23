@@ -72,41 +72,47 @@ Aplicação web MVC para gestão de motos, sensores de localização e pátios, 
 
 6. **copie os scripts de criação de tabelas do meu arquivo script_db.sql, entre depois no query editor do portal azure e cole os scripts la e execute**
 
+7. **se der erro ao logar no query editor ou em outro tipo de banco, redefina a senha usando esse comando:**
+   ```bash
+   az sql server update --name mottusense-sqlsrv-br --resource-group mottusense-rg --admin-password 'NovaSenha123!'
+
+7.1. **apos redefinir a senha com o comando logue de novo no query editor**
+
 
    
-7. **Criar App Service Plan:**
+8. **Criar App Service Plan:**
    ```bash
    az appservice plan create --name mottusense-plan --resource-group mottusense-rg --sku B1 --is-linux --location eastus
 
 
 
-8. **Criar App Service**
+9. **Criar App Service**
    ```bash
    az webapp create --resource-group mottusense-rg --plan mottusense-plan --name mottusense-app --runtime "JAVA:17-java17"
 
 
 
-9. **Configurar variáveis de ambiente no App Service:**
+10. **Configurar variáveis de ambiente no App Service:**
    ```bash
    az webapp config appsettings set --resource-group mottusense-rg --name mottusense-app --settings GITHUB_CLIENT_ID=Ov23liPExW7Z4g4CtLOY GITHUB_CLIENT_SECRET=3d334f3113c1890485ccc6fa39c27102bf512b84 GOOGLE_CLIENT_ID=412634895320-k0f2uesevgp6k3dulemambo97rd3qn2o.apps.googleusercontent.com GOOGLE_CLIENT_SECRET=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 SPRING_DATASOURCE_URL="jdbc:sqlserver://mottusense-sqlsrv-br.database.windows.net:1433;database=mottusensedb;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30" SPRING_DATASOURCE_USERNAME=admin_fiap@mottusense-sqlsrv-br SPRING_DATASOURCE_PASSWORD=Teste123!
 
 
 
-10. **rodar esse comando dentro da pasta do projeto:**
+11. **rodar esse comando dentro da pasta do projeto:**
     ```bash
     ./gradlew clean bootJar
 
 
-11. **Fazer deploy do .jar para o App Service fazer dentro da pasta do projeto:**
+12. **Fazer deploy do .jar para o App Service fazer dentro da pasta do projeto:**
     ```bash
     az webapp deploy --resource-group mottusense-rg --name mottusense-app --src-path .\build\libs\mottusense-0.0.1-SNAPSHOT.jar --type jar
 
-12. **se tudo foi seguido corretamente a aplicação estara disponivel no link:**
+13. **se tudo foi seguido corretamente a aplicação estara disponivel no link:**
     ```bash
     https://mottusense-app.azurewebsites.net
 
 
-13. **Acesse no navegador:**
+14. **Acesse no navegador:**
 
 🔑 Login (autentique-se primeiro):
 
