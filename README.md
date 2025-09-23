@@ -72,11 +72,10 @@ Aplicação web MVC para gestão de motos, sensores de localização e pátios, 
 
 6. **copie os scripts de criação de tabelas do meu arquivo script_db.sql, entre depois no query editor do portal azure e cole os scripts la e execute( obs: se conseguiu logar pule para o passo 8 e ignore o 7)**
 
-7. **se der erro ao logar no query editor ou em outro tipo de banco, redefina a senha usando esse comando:**
+7. **se der erro ao logar no query editor ou em outro tipo de banco, redefina a senha usando esse comando(apos redefinir a senha com o comando logue de novo no query editor):**
    ```bash
    az sql server update --name mottusense-sqlsrv-br --resource-group mottusense-rg --admin-password 'NovaSenha123!'
 
-7. **apos redefinir a senha com o comando logue de novo no query editor**
 
 
    
@@ -93,13 +92,13 @@ Aplicação web MVC para gestão de motos, sensores de localização e pátios, 
 
 
 10. **Configurar variáveis de ambiente no App Service:**
-   ```bash
-   az webapp config appsettings set --resource-group mottusense-rg --name mottusense-app --settings GITHUB_CLIENT_ID=Ov23liPExW7Z4g4CtLOY GITHUB_CLIENT_SECRET=3d334f3113c1890485ccc6fa39c27102bf512b84 GOOGLE_CLIENT_ID=412634895320-k0f2uesevgp6k3dulemambo97rd3qn2o.apps.googleusercontent.com GOOGLE_CLIENT_SECRET=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 SPRING_DATASOURCE_URL="jdbc:sqlserver://mottusense-sqlsrv-br.database.windows.net:1433;database=mottusensedb;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30" SPRING_DATASOURCE_USERNAME=admin_fiap@mottusense-sqlsrv-br SPRING_DATASOURCE_PASSWORD=Teste123!
+    ```bash
+    az webapp config appsettings set --resource-group mottusense-rg --name mottusense-app --settings GITHUB_CLIENT_ID=Ov23liPExW7Z4g4CtLOY GITHUB_CLIENT_SECRET=3d334f3113c1890485ccc6fa39c27102bf512b84 GOOGLE_CLIENT_ID=412634895320-k0f2uesevgp6k3dulemambo97rd3qn2o.apps.googleusercontent.com GOOGLE_CLIENT_SECRET=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 SPRING_DATASOURCE_URL="jdbc:sqlserver://mottusense-sqlsrv-br.database.windows.net:1433;database=mottusensedb;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30" SPRING_DATASOURCE_USERNAME=admin_fiap@mottusense-sqlsrv-br SPRING_DATASOURCE_PASSWORD=Teste123!
 
 
 10. **se voce teve que usar o comando anterior para mudar de senha use esse comando (a unica diferença é que mudei a senha para a que a gente utilizou que é a NovaSenha123!):**
-   ```bash
-   az webapp config appsettings set --resource-group mottusense-rg --name mottusense-app --settings GITHUB_CLIENT_ID=Ov23liPExW7Z4g4CtLOY GITHUB_CLIENT_SECRET=3d334f3113c1890485ccc6fa39c27102bf512b84 GOOGLE_CLIENT_ID=412634895320-k0f2uesevgp6k3dulemambo97rd3qn2o.apps.googleusercontent.com GOOGLE_CLIENT_SECRET=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 SPRING_DATASOURCE_URL="jdbc:sqlserver://mottusense-sqlsrv-br.database.windows.net:1433;database=mottusensedb;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30" SPRING_DATASOURCE_USERNAME=admin_fiap@mottusense-sqlsrv-br SPRING_DATASOURCE_PASSWORD=NovaSenha123!
+    ```bash
+    az webapp config appsettings set --resource-group mottusense-rg --name mottusense-app --settings GITHUB_CLIENT_ID=Ov23liPExW7Z4g4CtLOY GITHUB_CLIENT_SECRET=3d334f3113c1890485ccc6fa39c27102bf512b84 GOOGLE_CLIENT_ID=412634895320-k0f2uesevgp6k3dulemambo97rd3qn2o.apps.googleusercontent.com GOOGLE_CLIENT_SECRET=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 SPRING_DATASOURCE_URL="jdbc:sqlserver://mottusense-sqlsrv-br.database.windows.net:1433;database=mottusensedb;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30" SPRING_DATASOURCE_USERNAME=admin_fiap@mottusense-sqlsrv-br SPRING_DATASOURCE_PASSWORD=NovaSenha123!
 
 
 11. **rodar esse comando dentro da pasta do projeto:**
