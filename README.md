@@ -101,44 +101,42 @@ Aplicação web MVC para gestão de motos, sensores de localização e pátios, 
     ```bash
     az webapp deploy --resource-group mottusense-rg --name mottusense-app --src-path .\build\libs\mottusense-0.0.1-SNAPSHOT.jar --type jar
 
-12. **se tudo foi seguido corretamente a aplicação estara disponivel no link:**
-    ```bash
-    https://mottusense-app.azurewebsites.net
 
 
-13. **Acesse no navegador:**
+
+12. **Se tudo foi seguido corretamente a aplicação estara disponivel, Acesse no navegador:**
 
 🔑 Login (autentique-se primeiro):
 
-https://mottusense-app.azurewebsites.net/login
+http://mottusense-app.azurewebsites.net/login
 
 🏍️ Motos — Cadastro / Edição / Remoção / Listagem / Busca por placa:
 
-https://mottusense-app.azurewebsites.net/moto
+http://mottusense-app.azurewebsites.net/moto
 (se não estiver autenticado, será redirecionado para a tela de login)
 
 📄 Formulário de Motos:
 
-https://mottusense-app.azurewebsites.net/moto/form
+http://mottusense-app.azurewebsites.net/moto/form
 (acessível também clicando no botão "Nova moto")
 
 🏢 Pátios — Listagem (ver quais pátios estão disponíveis antes do cadastro):
 
-https://mottusense-app.azurewebsites.net/patio
+http://mottusense-app.azurewebsites.net/patio
 
 📍 Sensores — Cadastro / Edição / Remoção / Listagem:
 
-https://mottusense-app.azurewebsites.net/sensor-localizacao
+http://mottusense-app.azurewebsites.net/sensor-localizacao
 (para criar, é necessário ter uma moto cadastrada para vincular a placa)
 
 📝 Formulário de Sensores:
 
-https://mottusense-app.azurewebsites.net/sensor-localizacao/form
+http://mottusense-app.azurewebsites.net/sensor-localizacao/form
 (acessível também clicando no botão "Cadastrar sensor")
 
 🔒 Logout:
 
-https://mottusense-app.azurewebsites.net/logout
+http://mottusense-app.azurewebsites.net/logout
 
 
 
