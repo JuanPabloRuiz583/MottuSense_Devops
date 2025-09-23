@@ -47,7 +47,7 @@ Aplicação web MVC para gestão de motos, sensores de localização e pátios, 
 
 1. **Clone o repositório:**
    ```bash
-   git clone https://github.com/JuanPabloRuiz583/MottuSense_MvcDefinitivo.git
+   https://github.com/JuanPabloRuiz583/MottuSense_Devops.git
 
 2. **Criar grupo de recurso :**
    ```bash
