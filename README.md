@@ -22,7 +22,7 @@ Combinando banco de dados relacional e não relacional, DevOps, testes de qualid
 
 # Mottu Sense
 
-Aplicação web MVC para gestão de motos, sensores de localização e pátios, com autenticação de usuários.
+Aplicação web MVC para gestão de motos, sensores de localização e pátios, com autenticação de usuários.possui crud completo(create,update,delete e listar) para motos e sensores
 
 ## Tecnologias
 
