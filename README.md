@@ -99,7 +99,7 @@ Aplicação web MVC para gestão de motos, sensores de localização e pátios, 
 
 
 
-11. **escolher a imagem docker do meu acr que sera usada no web app:**
+11. **escolher a imagem docker do meu acr que sera usada no web app (verifique no acr em repositories qual é a versao da imagem):**
     ```bash
     az webapp config container set --name mottusense-app --resource-group mottusense-rg --docker-custom-image-name rm557727.azurecr.io/sprint4:20251105.11 --docker-registry-server-url rm557727.azurecr.io --docker-registry-server-user rm557727 --docker-registry-server-password "XE0Pq+UTMP2PFFvrDcIJFrj1zXl2VvGeaZS92LTE/h+ACRAaoog3"
 
