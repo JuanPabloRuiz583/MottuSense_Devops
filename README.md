@@ -80,26 +80,23 @@ Aplicação web MVC para gestão de motos, sensores de localização e pátios, 
 
 
 
+
 8. **Criar App Service**
    ```bash
-   az webapp create --resource-group mottusense-rg --plan mottusense-plan --name mottusense-app --runtime "JAVA:17-java17"
+   az webapp create --resource-group mottusense-rg --plan mottusense-plan --name mottusense-app --deployment-container-image-name nginx
 
 
 
 9. **Configurar variáveis de ambiente no App Service:**
     ```bash
-    az webapp config appsettings set --resource-group mottusense-rg --name mottusense-app --settings GITHUB_CLIENT_ID=Ov23liPExW7Z4g4CtLOY GITHUB_CLIENT_SECRET=3d334f3113c1890485ccc6fa39c27102bf512b84 GOOGLE_CLIENT_ID=412634895320-k0f2uesevgp6k3dulemambo97rd3qn2o.apps.googleusercontent.com GOOGLE_CLIENT_SECRET=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 SPRING_DATASOURCE_URL="jdbc:sqlserver://mottusense-sqlsrv-br.database.windows.net:1433;database=mottusensedb;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30" SPRING_DATASOURCE_USERNAME=admin_fiap@mottusense-sqlsrv-br SPRING_DATASOURCE_PASSWORD=Teste123!
+    az webapp config appsettings set --resource-group mottusense-rg --name mottusense-app --settings WEBSITES_PORT=8080 GITHUB_CLIENT_ID=Ov23liPExW7Z4g4CtLOY GITHUB_CLIENT_SECRET=3d334f3113c1890485ccc6fa39c27102bf512b84 GOOGLE_CLIENT_ID=412634895320-k0f2uesevgp6k3dulemambo97rd3qn2o.apps.googleusercontent.com GOOGLE_CLIENT_SECRET=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 SPRING_DATASOURCE_URL="jdbc:sqlserver://mottusense-sqlsrv-br.database.windows.net:1433;database=mottusensedb;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30" SPRING_DATASOURCE_USERNAME=admin_fiap SPRING_DATASOURCE_PASSWORD="Teste123!" DOCKER_REGISTRY_SERVER_URL=rm557727.azurecr.io DOCKER_REGISTRY_SERVER_USERNAME=rm557727 DOCKER_REGISTRY_SERVER_PASSWORD=XE0Pq+UTMP2PFFvrDcIJFrj1zXl2VvGeaZS92LTE/h+ACRAaoog3
 
 
 
-10. **rodar esse comando dentro da pasta do projeto:**
+
+10. **escolher a imagem docker do meu acr que sera usada no web app:**
     ```bash
-    ./gradlew clean bootJar
-
-
-11. **Fazer deploy do .jar para o App Service fazer dentro da pasta do projeto:**
-    ```bash
-    az webapp deploy --resource-group mottusense-rg --name mottusense-app --src-path .\build\libs\mottusense-0.0.1-SNAPSHOT.jar --type jar
+    az webapp config container set --name mottusense-app --resource-group mottusense-rg --docker-custom-image-name rm557727.azurecr.io/sprint4:20251105.11 --docker-registry-server-url rm557727.azurecr.io --docker-registry-server-user rm557727 --docker-registry-server-password "XE0Pq+UTMP2PFFvrDcIJFrj1zXl2VvGeaZS92LTE/h+ACRAaoog3"
 
 
 
