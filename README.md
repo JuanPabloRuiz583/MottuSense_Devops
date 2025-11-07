@@ -81,7 +81,7 @@ Aplicação web MVC para gestão de motos, sensores de localização e pátios, 
 
 8. **Criar App Service Plan:**
    ```bash
-   az appservice plan create --name mottusense-plan --resource-group mottusense-rg --sku B1 --is-linux --location eastus
+   az appservice plan create --name mottusense-plan --resource-group mottusense-rg --sku S1 --is-linux --location eastus
 
 
 
@@ -92,21 +92,8 @@ Aplicação web MVC para gestão de motos, sensores de localização e pátios, 
 
 
 
-10. **Configurar variáveis de ambiente no App Service:**
-    ```bash
-    az webapp config appsettings set --resource-group mottusense-rg --name mottusense-app --settings WEBSITES_PORT=8080 GITHUB_CLIENT_ID=Ov23liPExW7Z4g4CtLOY GITHUB_CLIENT_SECRET=3d334f3113c1890485ccc6fa39c27102bf512b84 GOOGLE_CLIENT_ID=412634895320-k0f2uesevgp6k3dulemambo97rd3qn2o.apps.googleusercontent.com GOOGLE_CLIENT_SECRET=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 SPRING_DATASOURCE_URL="jdbc:sqlserver://mottusense-sqlsrv-br.database.windows.net:1433;database=mottusensedb;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30" SPRING_DATASOURCE_USERNAME=admin_fiap SPRING_DATASOURCE_PASSWORD="Teste123!" DOCKER_REGISTRY_SERVER_URL=rm557727.azurecr.io DOCKER_REGISTRY_SERVER_USERNAME=rm557727 DOCKER_REGISTRY_SERVER_PASSWORD=XE0Pq+UTMP2PFFvrDcIJFrj1zXl2VvGeaZS92LTE/h+ACRAaoog3
 
-
-
-
-11. **escolher a imagem docker do meu acr que sera usada no web app (verifique no acr em repositories qual é a versao da imagem):**
-    ```bash
-    az webapp config container set --name mottusense-app --resource-group mottusense-rg --docker-custom-image-name rm557727.azurecr.io/sprint4:20251105.11 --docker-registry-server-url rm557727.azurecr.io --docker-registry-server-user rm557727 --docker-registry-server-password "XE0Pq+UTMP2PFFvrDcIJFrj1zXl2VvGeaZS92LTE/h+ACRAaoog3"
-
-
-
-
-12. **Se tudo foi seguido corretamente a aplicação estara disponivel, Acesse no navegador:**
+10. **Se tudo foi seguido corretamente a aplicação estara disponivel, Acesse no navegador:**
 
 🔑 Login (autentique-se primeiro):
 
